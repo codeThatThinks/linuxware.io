@@ -1,0 +1,17 @@
+<%= render "heading" %>
+<div class="row">
+	<div class="col-xs-12">
+		<h2 id="title">
+			<% if @repo.is_fetching %>
+			Fetching packages....
+			<% elsif @repo.is_fetch_queued %>
+			Waiting for fetch to start...
+			<% else %>
+			Fetch completed.
+			<% end %>
+		</h2>
+		<pre data-fetch-status="<%= fetch_status_repo_path(@repo) %>"><% if @repo.is_fetching || (!@repo.is_fetching && !@repo.is_fetch_queued) %><%= @repo.fetch_log %><% elsif @repo.is_fetch_queued %>Fetch has been queued.<% end %></pre>
+		<br />
+		<%= link_to "Back", @repo, class: "btn btn-primary" %>
+	</div>
+</div>

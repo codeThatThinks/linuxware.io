@@ -1,0 +1,22 @@
+<div class="page-header">
+	<h1><%= link_to @distro.name, @distro %> &gt; Add Repo</h1>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<%= form_for @repo, url: distro_repos_path do |f| %>
+		<div class="form-group">
+			<%= f.label :name %>
+			<%=	f.text_field :name, class: "form-control" %>
+		</div>
+		<div class="form-group">
+			<%= f.label :type, "Repo Type" %>
+			<%=	f.select :type, @repo_types.collect {|repo_type| [repo_type.constantize.type_name, repo_type]}, {}, class: "form-control" %>
+		</div>
+		<div class="form-group">
+			<%= f.label :url, "URL" %>
+			<%=	f.text_field :url, class: "form-control" %>
+		</div>
+		<%= f.submit class: "btn btn-default" %>
+		<% end %>
+	</div>
+</div>

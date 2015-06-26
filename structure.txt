@@ -1,0 +1,151 @@
+Software: an singular piece of software or module for another piece of software (e.g. python)
+	:name
+	:description
+	:license
+	:library, :addon, :plugin, :extension, :module => points to another Software
+	:releases => Releases for this Software
+
+SoftwareRelease: a major release of a piece of software (e.g. python2 and python3)
+	:release-name
+
+Distro: a version of Linux (e.g. Debian)
+	:distro-name
+	:repos => Repos for this Distro
+
+Repo: a singular package list for a distro (e.g. Jessie)
+	:repo-name
+
+Package: a single package that exists in a repo and provides a software (or part of it)
+	:package-name
+	:description
+	:arch
+	:version
+	:is-main-package
+	:repo
+	:release
+
+Git
+	name: Git
+	description: The fast distributed version control system.
+	license: GPL2
+
+	Debian
+		jessie (stable)
+			git
+				package-name: git
+				version: 1:2.1.4-2.1
+		sid (unstable)
+			git
+				package-name: git
+				version: 1:2.1.4-2.1
+
+	Ubuntu
+		trusty (14.04LTS)
+			git
+				package-name: git
+				version: 1:1.9.1-1ubuntu0.1
+		utopic (14.10)
+			git
+				package-name: git
+				version: 1:2.1.0-ubuntu0.1
+
+	Fedora
+		Fedora 21
+			git
+				package-name: git
+				version: 2.1.0-4.fc21
+		Rawhide
+			git
+				package-name: git
+				version: 2.4.2-1.fc23
+
+	Arch Linux
+		Extra
+			git
+				package-name: git
+				version: 2.4.4-1
+
+Python
+	name: Python
+	description: An interactive high-level object-oriented language.
+	license: PSFL
+
+	Version 3
+		Debian
+			jessie (stable)
+				python3
+					package-name: python3
+					version: 3.4.2-2
+			sid (unstable)
+				python3
+					package-name: python3
+					version: 3.4.2-2
+
+		Ubuntu
+			trusty (14.04LTS)
+				python3
+					package-name: python3
+					version: 3.4.0-0ubuntu2
+			utopic (14.10)
+				python3
+					package-name: python3
+					version: 3.4.2-1
+
+		Fedora
+			Fedora 21
+				python3
+					package-name: python3
+					version: 3.2.1-16.fc21
+			Rawhide
+				python3
+					package-name: python3
+					version: 3.4.3-2.fc23
+					
+		Arch Linux
+			Extra
+				python
+					package-name: python
+					version: 3.4.3-2
+
+	Version 2
+		Debian
+			jessie (stable)
+				python
+					package-name: python
+					version: 2.7.9-1
+			sid (unstable)
+				python
+					package-name: python
+					version: 2.7.9-1
+
+		Ubuntu
+			trusty (14.04LTS)
+				python
+					package-name: python
+					version: 2.7.5-5ubuntu3
+			utopic (14.10)
+				python
+					package-name: python
+					version: 2.7.8-1
+
+		Fedora
+			Fedora 21
+				python
+					package-name: python
+					version: 2.7.8-9.fc21
+			Rawhide
+				python
+					package-name: python
+					version: 2.7.10-1.fc23
+
+		Arch Linux
+			Extra
+				python2
+					package-name: python2
+					version: 2.7.10-1
+
+Python-sympy
+	name: Python-sympy
+	description: Computer Algebra System (CAS) in Python
+	license: BSD
+	for: Python

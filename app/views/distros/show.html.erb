@@ -1,0 +1,25 @@
+<div class="page-header">
+	<div class="pull-left"><h1><%= @distro.name %></h1></div>
+	<div class="pull-right"><%= link_to "Edit", edit_distro_path(@distro), class: "btn btn-default" %>&nbsp;&nbsp;<%= link_to "Delete", @distro, :method => :delete, class: "btn btn-danger" %></div>
+</div>
+<br />
+<div class="row">
+	<div class="col-xs-12">
+		<h2>Repos</h2>
+		<% @distro.repos.each do |repo| %>
+		<h3>
+			<%= link_to repo.name, repo_path(repo) %>&nbsp;&nbsp;
+			<small><%= pluralize repo.packages.length, "Package" %></small>
+			<% if !repo.fetch_info.empty? && (repo.fetch_info[:updated_conflicts].length > 0 || repo.fetch_info[:removed].length > 0) %>
+			&nbsp;&nbsp;<small><span class="label label-danger label-large-nomargin">action required</span></small>
+			<% elsif repo.is_fetching %>
+			&nbsp;&nbsp;<small><span class="label label-success label-large-nomargin">fetching</span></small>
+			<% elsif repo.is_fetch_queued %>
+			&nbsp;&nbsp;<small><span class="label label-info label-large-nomargin">queued</span></small>
+			<% end %>
+		</h3>
+		<% end %>
+		<br />
+		<%= link_to "Add Repo", new_distro_repo_path(@distro), class: "btn btn-primary" %>
+	</div>
+</div>

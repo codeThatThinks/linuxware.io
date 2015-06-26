@@ -1,0 +1,41 @@
+<div class="page-header">
+	<div class="pull-left"><h1><%= @software.name %></h1></div>
+	<div class="pull-right"><%= link_to "Edit", edit_software_path(@software), class: "btn btn-default" %>&nbsp;&nbsp;<%= link_to "Delete", @software, :method => :delete, class: "btn btn-danger" %></div>
+</div>
+<div class="row">
+	<br /><br /><br />
+	<div class="col-md-4">
+		<div class="thumbnail">
+			<img src="http://placehold.it/480x320" />
+			<div class="caption">
+				<table class="table">
+					<tr><td><b>Official Site:</b></td><td class="text-right"><a href="<%= @software.url %>"><%= @software.url %></a></td></tr>
+					<tr><td><b>License:</b></td><td class="text-right"><%= @software.license %></td></tr>
+					<tr>
+						<td><b>Tags:</b></td>
+						<td class="text-right">
+							<span class="label label-large label-success">game</span><br />
+							<span class="label label-large label-primary">open source</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<h2>Description</h2>
+		<p><%= @software.description %></p>
+
+		<h2>Packages</h2>
+		<table class="table table-hover">
+			<tr><th colspan="3"><h3>Debian</h3></th></tr>
+			<tr><td><strong><code>0ad</code></strong></td><td><strong>0.0.17-1</strong></td><td><strong>Real-time strategy game of ancient warfare</strong></td></tr>
+			<tr><td><code>0ad-dbg</code></td><td>0.0.17-1</td><td>Real-time strategy game of ancient warfare (debug version)</td></tr>
+			<tr><td><code>0ad-data</code></td><td>0.0.17-1</td><td>Game data and assets.</td></tr>
+
+			<tr><th colspan="3"><h3>Arch Linux</h3></th></tr>
+			<tr><td><strong><code>0ad</code></strong></td><td><strong>0.0.18-4</strong></td><td><strong>Real-time strategy game of ancient warfare</strong></td></tr>
+			<tr><td><code>0ad-data</code></td><td>0.0.18-4</td><td>Game data and assets.</td></tr>
+		</table>
+	</div>
+</div>

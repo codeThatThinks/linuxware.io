@@ -1,0 +1,22 @@
+<%= render "heading" %>
+<div class="row">
+	<div class="col-xs-12">
+		<h2>Packages (<%= @repo.packages.length %>)</h2>
+		<% if @repo.packages.length == 0 %>
+		<span>There are no packages in this repo.</span>
+		<% else %>
+		<% @packages.each do |package| %>
+		<h4><%= package.name %> <small><%= package.version %></small></h4>
+		<% end %>
+		<nav>
+			<ul class="pagination">
+				<li<% if @page_num == 1 %> class="disabled"<% end %>><a href="<%= packages_repo_path @repo, @page_num - 1 %>" aria-label="Previous"><span aria-hiddin="true">&laquo;</span></a></li>
+				<% for i in @page_range do %>
+				<li<% if i == @page_num %> class="active"<% end %>><a href="<%= packages_repo_path @repo, i %>"><%= i %></a></li>
+				<% end %>
+				<li<% if @page_num == @num_pages %> class="disabled"<% end %>><a href="<%= packages_repo_path @repo, @page_num + 1 %>" aria-label="Next"><span aria-hiddin="true">&raquo;</span></a></li>
+			</ul>
+		</nav>
+		<% end %>
+	</div>
+</div>

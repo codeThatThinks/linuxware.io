@@ -1,0 +1,32 @@
+<%= render "heading" %>
+<div class="row">
+	<div class="col-xs-12">
+		<h2>Fetch @ <%= @repo.last_fetch.strftime("%-m/%-d/%y %-I:%-M:%-S %p %Z") %></h2>
+		<table class="table table-hover">
+			<tr><th colspan="2"><h3>Release Info</h3></th></tr>
+			<tr><th>Version:</th><td><%= @repo.fetch_last_version %></td></tr>
+			<tr><th>Date:</th><td><%= @repo.fetch_last_date %></td></tr>
+			<tr><th colspan="2"><h3>Package Info</h3></th></tr>
+			<tr><th>New:</th><td><%= @repo.fetch_info[:new] %></td></tr>
+			<tr><th>Updated:</th><td><%= @repo.fetch_info[:updated] %></td></tr>
+			<tr><th>Not Updated:</th><td><%= @repo.fetch_info[:not_updated] %></td></tr>
+			<tr><th>Removed:</th><td><%= @repo.fetch_info[:removed].length %></td></tr>
+			<tr><th>Conflicts:</th><td><%= @repo.fetch_info[:updated_conflicts].length %></td></tr>
+		</table>
+		<% if @repo.fetch_info[:updated_conflicts].length > 0 %>
+		<h3>Update Conflicts</h3>
+		<% @repo.fetch_info[:updated_conflicts].each do |conflict| %>
+		<% conflict.each |package| %>
+		<h4><%= package[:name] %> <small><%= package[:version] %></small></h4>
+		<% end %>
+		<% end %>
+		<% if @removed.length > 0 %>
+		<h3>Removed Packages</h3>
+		<% @removed.each do |package| %>
+		<h4><%= package.name %> <small><%= package.version %></small></h4>
+		<% end %>
+		<% end %>
+		<h3>Fetch Log</h3>
+		<pre><%= @repo.fetch_log %></pre>
+	</div>
+</div>

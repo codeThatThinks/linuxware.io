@@ -1,0 +1,15 @@
+<div class="page-header">
+	<div class="pull-left"><h1>Software</h1></div>
+	<div class="pull-right"><%= link_to "Add", new_software_path, class: "btn btn-primary" %></div>
+</div>
+<br />
+<div class="row">
+	<div class="col-xs-12">
+		<% if @software_index.length == 0 %>
+		<span>No software found.</span>
+		<% end %>
+		<% @software_index.each do |software| %>
+		<h2><%= link_to software.name, software %>&nbsp;&nbsp;<small><%= software.description %></small></h2>
+		<% end %>
+	</div>
+</div>

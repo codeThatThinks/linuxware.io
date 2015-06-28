@@ -6,7 +6,7 @@
 		<span>There are no packages in this repo.</span>
 		<% else %>
 		<% @packages.each do |package| %>
-		<h4><%= package.name %> <small><%= package.version %></small></h4>
+		<h4><%= package.name %> <small><%= package.version %></small><% if package.software %> &rarr; <%= package.software.name %><% end %></h4>
 		<% end %>
 		<nav>
 			<ul class="pagination">

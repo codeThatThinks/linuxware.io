@@ -27,15 +27,17 @@
 		<p><%= @software.description %></p>
 
 		<h2>Packages</h2>
+		<% if @packages.length == 0 %>
+		There are no packages available for this software.
+		<% else %>
 		<table class="table table-hover">
-			<tr><th colspan="3"><h3>Debian</h3></th></tr>
-			<tr><td><strong><code>0ad</code></strong></td><td><strong>0.0.17-1</strong></td><td><strong>Real-time strategy game of ancient warfare</strong></td></tr>
-			<tr><td><code>0ad-dbg</code></td><td>0.0.17-1</td><td>Real-time strategy game of ancient warfare (debug version)</td></tr>
-			<tr><td><code>0ad-data</code></td><td>0.0.17-1</td><td>Game data and assets.</td></tr>
-
-			<tr><th colspan="3"><h3>Arch Linux</h3></th></tr>
-			<tr><td><strong><code>0ad</code></strong></td><td><strong>0.0.18-4</strong></td><td><strong>Real-time strategy game of ancient warfare</strong></td></tr>
-			<tr><td><code>0ad-data</code></td><td>0.0.18-4</td><td>Game data and assets.</td></tr>
+			<% @packages.each do |p| %>
+			<tr><th colspan="3"><h3><%= p[:distro] %></h3></th></tr>
+			<% p[:packages].each do |pkg| %>
+			<tr><td><code><%= pkg[:name] %></code></td><td><%= pkg[:version] %></td><td><%= pkg[:description] %></td></tr>
+			<% end %>
+			<% end %>
 		</table>
+		<% end %>
 	</div>
 </div>

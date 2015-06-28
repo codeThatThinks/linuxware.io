@@ -9,7 +9,7 @@
 		<span>No software found.</span>
 		<% end %>
 		<% @software_index.each do |software| %>
-		<h2><%= link_to software.name, software %>&nbsp;&nbsp;<small><%= software.description %></small></h2>
+		<h2><%= link_to software.name, software %>&nbsp;&nbsp;<small><%= software.short_description %></small></h2>
 		<% end %>
 	</div>
 </div>

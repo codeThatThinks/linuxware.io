@@ -1,6 +1,6 @@
 class SoftwareController < ApplicationController
 	before_action :get_software_index, only: [:index]
-	before_action :get_software, only: [:edit, :show, :destroy]
+	before_action :get_software, only: [:edit, :update, :show, :destroy]
 
 	def get_software_index
 		@software_index = Software.all
@@ -11,7 +11,7 @@ class SoftwareController < ApplicationController
 	end
 
 	def software_params
-		params.require(:software).permit(:name, :description, :url, :license)
+		params.require(:software).permit(:name, :short_description, :description, :url, :license)
 	end
 
 	def index
@@ -42,6 +42,19 @@ class SoftwareController < ApplicationController
 	end
 
 	def show
+		@packages = Array.new
+
+		Distro.all.each do |d|
+			d_hash = Hash.new
+			d_hash[:distro] = d.name
+			d_hash[:packages] = Array.new
+			d.repos.each do |r|
+				r.packages.where(software: @software).each do |s|
+					d_hash[:packages] << {name: s.name, version: s.version, description: s.description}
+				end
+			end
+			@packages << d_hash
+		end
 	end
 
 	def destroy

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625031742) do
+ActiveRecord::Schema.define(version: 20150628043246) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -30,9 +30,7 @@ ActiveRecord::Schema.define(version: 20150625031742) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "distros", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "packages", force: :cascade do |t|
@@ -43,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150625031742) do
     t.datetime "updated_at",   null: false
     t.integer  "architecture"
     t.text     "description"
+    t.integer  "software_id"
   end
 
   add_index "packages", ["repo_id"], name: "index_packages_on_repo_id"
@@ -68,8 +67,9 @@ ActiveRecord::Schema.define(version: 20150625031742) do
     t.text     "description"
     t.string   "url"
     t.string   "license"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.text     "short_description"
   end
 
 end

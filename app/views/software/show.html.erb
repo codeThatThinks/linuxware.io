@@ -11,13 +11,16 @@
 				<table class="table">
 					<tr><td><b>Official Site:</b></td><td class="text-right"><a href="<%= @software.url %>"><%= @software.url %></a></td></tr>
 					<tr><td><b>License:</b></td><td class="text-right"><%= @software.license %></td></tr>
+					<% if @software.tags != "" %>
 					<tr>
 						<td><b>Tags:</b></td>
 						<td class="text-right">
-							<span class="label label-large label-success">game</span><br />
-							<span class="label label-large label-primary">open source</span>
+							<% @software.tags.split(", ").each do |tag| %>
+							<span class="label label-large label-default"><%= tag %></span><br />
+							<% end %>
 						</td>
 					</tr>
+					<% end %>
 				</table>
 			</div>
 		</div>

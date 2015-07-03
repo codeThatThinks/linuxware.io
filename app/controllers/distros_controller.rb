@@ -10,7 +10,7 @@ class DistrosController < ApplicationController
 
   def create
   	@distro = Distro.create(params.require(:distro).permit(:name))
-  	redirect_to action: "show"
+  	redirect_to @distro
   end
 
   def index

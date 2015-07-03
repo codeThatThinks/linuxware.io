@@ -6,6 +6,7 @@ class DistrosController < ApplicationController
   end
 
   def new
+    @distro = Distro.new
   end
 
   def create

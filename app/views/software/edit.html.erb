@@ -1,8 +1,8 @@
-<div class="page-header">
-	<h1>Edit <%= @software.name %></h1>
-</div>
 <div class="row">
 	<div class="col-xs-12">
-		<%= render partial: 'form', locals: {url: @software, method: :put} %>
+		<div class="page-header">
+			<h1>Edit <%= @software.name %></h1>
+		</div>
+		<%= render partial: 'form', locals: {url: @software, method: :patch} %>
 	</div>
 </div>

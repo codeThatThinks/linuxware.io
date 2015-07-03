@@ -1,9 +1,10 @@
-<div class="page-header">
-	<div class="pull-left"><h1><%= @software.name %></h1></div>
-	<div class="pull-right"><%= link_to "Edit", edit_software_path(@software), class: "btn btn-default" %>&nbsp;&nbsp;<%= link_to "Delete", @software, :method => :delete, class: "btn btn-danger" %></div>
+<div class="row">
+	<div class="page-header">
+		<div class="col-xs-6"><h1><%= @software.name %></h1></div>
+		<div class="col-xs-6 text-right"><%= link_to "Edit", edit_software_path(@software), class: "btn btn-default" %>&nbsp;&nbsp;<%= link_to "Delete", @software, :method => :delete, class: "btn btn-danger" %></div>
+	</div>
 </div>
 <div class="row">
-	<br /><br /><br />
 	<div class="col-md-4">
 		<div class="thumbnail">
 			<img src="http://placehold.it/480x320" />

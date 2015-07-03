@@ -1,8 +1,9 @@
-<div class="page-header">
-	<div class="pull-left"><h1>Software</h1></div>
-	<div class="pull-right"><%= link_to "Add", new_software_path, class: "btn btn-primary" %></div>
+<div class="row">
+	<div class="page-header">
+		<div class="col-xs-8"><h1>Software</h1></div>
+		<div class="col-xs-4 text-right"><%= link_to "Add", new_software_path, class: "btn btn-primary" %></div>
+	</div>
 </div>
-<br />
 <div class="row">
 	<div class="col-xs-12">
 		<% if @software_index.length == 0 %>

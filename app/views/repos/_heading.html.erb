@@ -1,31 +1,36 @@
-<div class="page-header">
-	<div class="pull-left">
-		<h1>
-			<%= link_to @distro.name, @distro %> &gt; <% if !current_page?(repo_path(@repo)) %><%= link_to @repo.name, @repo %><% else %><%= @repo.name %><% end %><br />
-			<small><span class="label label-default"><%= @repo_type_name %></span> <%= @repo.url %></small>
-		</h1>
-	</div>
-	<div class="pull-right">
-		<% if !current_page?(fetch_repo_path(@repo)) %>
-		<% if @repo.is_fetching %>
-		<%= link_to "Fetching Packages...", fetch_repo_path(@repo), class: "btn btn-success" %>
-		<% elsif @repo.is_fetch_queued %>
-		<%= link_to "Fetch Queued", fetch_repo_path(@repo), class: "btn btn-info" %>
-		<% elsif !@repo.fetch_info.empty? %>
-		<div class="btn-group">
-			<%= link_to "View Last Fetch", view_fetch_repo_path(@repo), class: "btn btn-primary" %>
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="caret"></span>
-				<span class="sr-only">Toggle Dropdown</span>
-			</button>
-			<ul class="dropdown-menu">
-				<li><%= link_to "Fetch Packages", fetch_repo_path(@repo) %></li>
-			</ul>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="page-header">
+			<div class="pull-left">
+				<h1>
+					<%= link_to @distro.name, @distro %> &gt; <% if !current_page?(repo_path(@repo)) %><%= link_to @repo.name, @repo %><% else %><%= @repo.name %><% end %><br />
+					<small><span class="label label-default"><%= @repo_type_name %></span> <%= @repo.url %></small>
+				</h1>
+			</div>
+			<div class="pull-right">
+				<% if !current_page?(fetch_repo_path(@repo)) %>
+				<% if @repo.is_fetching %>
+				<%= link_to "Fetching Packages...", fetch_repo_path(@repo), class: "btn btn-success" %>
+				<% elsif @repo.is_fetch_queued %>
+				<%= link_to "Fetch Queued", fetch_repo_path(@repo), class: "btn btn-info" %>
+				<% elsif !@repo.fetch_info.empty? %>
+				<div class="btn-group">
+					<%= link_to "View Last Fetch", view_fetch_repo_path(@repo), class: "btn btn-primary" %>
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="caret"></span>
+						<span class="sr-only">Toggle Dropdown</span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><%= link_to "Fetch Packages", fetch_repo_path(@repo) %></li>
+					</ul>
+				</div>
+				<% else %>
+				<%= link_to "Fetch Packages", fetch_repo_path(@repo), class: "btn btn-primary" %>
+				<% end %>
+				<% end %>
+				&nbsp;<%= link_to "Edit", edit_repo_path(@repo), class: "btn btn-default" %>&nbsp;&nbsp;<%= link_to "Delete", @repo, :method => :delete, class: "btn btn-danger" %>
+				<br />
+			</div>
 		</div>
-		<% else %>
-		<%= link_to "Fetch Packages", fetch_repo_path(@repo), class: "btn btn-primary" %>
-		<% end %>
-		<% end %>
-		&nbsp;<%= link_to "Edit", edit_repo_path(@repo), class: "btn btn-default" %>&nbsp;&nbsp;<%= link_to "Delete", @repo, :method => :delete, class: "btn btn-danger" %>
 	</div>
 </div>

@@ -1,13 +1,18 @@
 <%= render "heading" %>
 <div class="row">
+	<div class="col-xs-6"><h2>Packages (<%= @repo.packages.length %>)</h2></div>
+	<div class="col-xs-6"><div class="pull-right"><% if @repo.packages.length != 0 %><%= link_to "Assign Software", edit_packages_repo_path(@repo, @page_num), class: "btn btn-primary" %><% end %></div></div>
+</div>
+<div class="row">
 	<div class="col-xs-12">
-		<h2>Packages (<%= @repo.packages.length %>)</h2>
 		<% if @repo.packages.length == 0 %>
 		<span>There are no packages in this repo.</span>
 		<% else %>
-		<% @packages.each do |package| %>
-		<h4><%= package.name %> <small><%= package.version %></small><% if package.software %> &rarr; <%= package.software.name %><% end %></h4>
-		<% end %>
+		<table class="table table-inline">
+			<% @packages.each do |package| %>
+			<tr><td><h4><%= package.name %> <nobr><small><%= package.version %></small></nobr></h4></td><td><% if package.software %><h4>&rarr;</h4><% end %></td><td><% if package.software %><h4><%= link_to package.software.name, package.software %></h4><% end %></td></tr>
+			<% end %>
+		</table>
 		<nav>
 			<ul class="pagination">
 				<li<% if @page_num == 1 %> class="disabled"<% end %>><a href="<%= packages_repo_path @repo, @page_num - 1 %>" aria-label="Previous"><span aria-hiddin="true">&laquo;</span></a></li>

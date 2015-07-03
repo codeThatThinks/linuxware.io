@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   get "repos/:id/fetch_status", to: "repos#fetch_status", as: :fetch_status_repo
   get "repos/:id/view_fetch", to: "repos#view_fetch", as: :view_fetch_repo
   get "repos/:id/packages/:page_num", to: "repos#show", as: :packages_repo
+  get "repos/:id/packages/:page_num/edit", to: "repos#edit_packages", as: :edit_packages_repo
+  patch "repos/:id/packages/:page_num", to: "repos#update_packages"
+  put "repos/:id/packages/:page_num", to: "repos#update_packages"
 
   resources :software
+  get "software/search/:query", to: "software#search", as: :software_search
 
   root 'software#index'
 

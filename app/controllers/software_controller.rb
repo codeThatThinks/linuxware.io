@@ -15,6 +15,10 @@ class SoftwareController < ApplicationController
 	end
 
 	def index
+		respond_to do |format|
+			format.html
+			format.json { render json: Software.all.collect {|s| {name: s.name, description: s.short_description, url: s.url, license: s.license, tags: s.tags}} }
+		end
 	end
 
 	def new
@@ -58,5 +62,9 @@ class SoftwareController < ApplicationController
 	end
 
 	def destroy
+	end
+
+	def search
+		render json: Software.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
 	end
 end

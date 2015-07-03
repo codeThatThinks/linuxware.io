@@ -1,8 +1,8 @@
 class ReposController < ApplicationController
-	before_action :get_repo, only: [:show, :edit, :update, :destroy, :fetch, :fetch_status, :view_fetch]
-	before_action :get_repo_types, only: [:new, :edit, :fetch, :view_fetch]
+	before_action :get_repo, only: [:show, :edit_packages, :update_packages, :edit, :update, :destroy, :fetch, :fetch_status, :view_fetch]
+	before_action :get_repo_types, only: [:new, :edit_packages, :edit, :fetch, :view_fetch]
 	before_action :get_distro, only: [:new, :create]
-	before_action :get_repo_distro, only: [:show, :edit, :destroy, :fetch, :view_fetch]
+	before_action :get_repo_distro, only: [:show, :edit_packages, :edit, :destroy, :fetch, :view_fetch]
 	before_action :get_repo_type_name, only: [:show, :fetch, :view_fetch]
 
 	def get_repo
@@ -43,6 +43,40 @@ class ReposController < ApplicationController
 		end
 
 		@packages = @repo.packages[(@per_page * (@page_num - 1))..(@per_page * (@page_num - 1) + @per_page - 1)]
+	end
+
+	def edit_packages
+		if @repo.packages.length == 0
+			redirect_to @repo
+		end
+
+		@page_num = (params.has_key?(:page_num)) ? params[:page_num].to_i : 1
+		@per_page = 50
+		@num_pages = (@repo.packages.length / @per_page.to_f).ceil
+
+		if @repo.packages.length > 0 && @page_num > @num_pages
+			redirect_to @repo
+		end
+
+		if @num_pages % 10 != 0 && @page_num > (@num_pages / 10.0).floor * 10
+			@page_range = ((@num_pages / 10.0).floor * 10 + 1)..@num_pages
+		elsif @page_num % 10 == 0
+			@page_range = (@page_num - 9)..@page_num
+		else
+			@page_range = ((@page_num / 10.0).floor * 10 + 1)..((@page_num / 10.0).ceil * 10)
+		end
+
+		@packages = @repo.packages[(@per_page * (@page_num - 1))..(@per_page * (@page_num - 1) + @per_page - 1)]
+	end
+
+	def update_packages
+		@page_num = (params.has_key?(:page_num)) ? params[:page_num].to_i : 1
+
+		params.require(:package).each do |id, software|
+			Package.find(id).update({software: Software.find_by(name: software)})
+		end
+
+		redirect_to packages_repo_path(@repo, @page_num)
 	end
 
 	def new

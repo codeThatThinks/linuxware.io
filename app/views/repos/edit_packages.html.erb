@@ -1,0 +1,16 @@
+<%= render "heading" %>
+<div class="row">
+	<div class="col-xs-12">
+		<h2>Assign Packages</h2>
+		<%= form_for :packages, url: packages_repo_path(@repo, @page_num), method: :patch do |f| %>
+			<div class="form-group">
+				<table class="table table-inline">
+					<% @packages.each do |package| %>
+					<tr><td><h4><%= package.name %> <nobr><small><%= package.version %></small></nobr></h4></td><td><h4>&rarr;</h4></td><td><%= text_field :package, package.id, value: (package.software) ? package.software.name : "", size: 100, autocomplete: "off", class: "form-control typeahead-softwares" %></td></tr>
+					<% end %>
+				</table>
+			</div>
+			<%= f.submit "Assign", class: "btn btn-primary" %>&nbsp;&nbsp;<%= link_to "Cancel", @repo, class: "btn btn-default" %>
+		<% end %>
+	</div>
+</div>

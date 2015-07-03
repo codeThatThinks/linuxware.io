@@ -42,7 +42,7 @@ class ReposController < ApplicationController
 			@page_range = ((@page_num / 10.0).floor * 10 + 1)..((@page_num / 10.0).ceil * 10)
 		end
 
-		@packages = @repo.packages[(@per_page * (@page_num - 1) + 1)..(@per_page * (@page_num - 1) + @per_page)]
+		@packages = @repo.packages[(@per_page * (@page_num - 1))..(@per_page * (@page_num - 1) + @per_page - 1)]
 	end
 
 	def new

@@ -1,0 +1,15 @@
+<%= form_for @repo, url: url, method: method do |f| %>
+<div class="form-group">
+	<%= f.label :name %>
+	<%=	f.text_field :name, class: "form-control" %>
+</div>
+<div class="form-group">
+	<%= f.label :type, "Repo Type" %>
+	<%=	f.select :type, @repo_types.collect {|repo_type| [repo_type.constantize.type_name, repo_type]}, {}, class: "form-control" %>
+</div>
+<div class="form-group">
+	<%= f.label :url, "URL" %>
+	<%=	f.text_field :url, class: "form-control" %>
+</div>
+<%= f.submit class: "btn btn-primary" %>
+<% end %>

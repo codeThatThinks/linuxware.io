@@ -14,9 +14,10 @@ Rails.application.routes.draw do
   put "repos/:id/packages/:page_num", to: "repos#update_packages"
 
   resources :software
-  get "software/search/:query", to: "software#search", as: :software_search
+  get "search_redirect", to: "software#search_redirect", as: :software_search_form
+  get "search/:query", to: "software#search", as: :software_search
 
-  root 'software#index'
+  root 'software#landing'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

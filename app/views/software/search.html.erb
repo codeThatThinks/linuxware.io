@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="page-header">
+		<div class="col-md-6"><h1>Search<br /><small><%= @search_results.length %> results</small></h1></div>
+		<div class="col-md-6 text-right">
+			<%= form_tag software_search_form_path, method: :get, enforce_utf8: false, class: "form-inline" do %>
+				<div class="form-group has-feedback">
+					<%= text_field_tag "query", @search_query, size: "50", class: "form-control" %>
+					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<% if @search_results.length == 0 %>
+		<span>No software found.</span>
+		<% end %>
+		<% @search_results.each do |software| %>
+		<h2><%= link_to software.name, software %>&nbsp;&nbsp;<small><%= software.short_description %></small></h2>
+		<% end %>
+	</div>
+</div>

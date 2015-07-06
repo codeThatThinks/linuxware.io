@@ -14,6 +14,14 @@ class SoftwareController < ApplicationController
 		params.require(:software).permit(:name, :short_description, :description, :url, :license)
 	end
 
+	def landing
+		@recent_softwares = Software.all.order(updated_at: :desc).limit(5)
+		@num_softwares = Software.all.length
+		@num_packages = Package.all.length
+		@num_distros = Distro.all.length
+		@num_repos = Repo.all.length
+	end
+	
 	def index
 		respond_to do |format|
 			format.html
@@ -64,7 +72,25 @@ class SoftwareController < ApplicationController
 	def destroy
 	end
 
+	def search_redirect
+		if !params.has_key?(:query)
+			redirect_to action: "index"
+		end
+
+		redirect_to software_search_path(params[:query])
+	end
+
 	def search
-		render json: Software.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
+		if !params.has_key?(:query)
+			redirect_to action: "index"
+		end
+
+		respond_to do |format|
+			format.html {
+				@search_query = params[:query].to_s
+				@search_results = Software.search(params[:query], fields: [{name: :word}])
+			}
+			format.json { render json: Software.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name) }
+		end
 	end
 end

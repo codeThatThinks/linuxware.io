@@ -3,7 +3,7 @@ $(document).ready ->
     queryTokenizer: Bloodhound.tokenizers.whitespace
     datumTokenizer: Bloodhound.tokenizers.whitespace
     remote:
-      url: '/software/search/%QUERY'
+      url: '/search/%QUERY.json'
       wildcard: '%QUERY')
   $('.typeahead-softwares').typeahead { highlight: true },
     name: 'softwares'

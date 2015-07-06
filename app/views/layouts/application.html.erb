@@ -38,9 +38,13 @@
 			</div>
 		</nav>
 
+		<% if current_page?('/') %>
+		<%= yield %>
+		<% else %>
 		<div class="container">
 			<%= yield %>
 		</div>
+		<% end %>
 
 		<footer class="footer">
 			<div class="container"><div class="col-xs-12"><p class="text-muted">&copy; 2015 Ian Glen&nbsp;&nbsp;&middot;&nbsp;&nbsp;Fork on <a href="https://github.com/codeThatThinks/linuxware.io">Github</a></p></div></div>

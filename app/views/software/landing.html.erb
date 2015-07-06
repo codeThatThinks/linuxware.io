@@ -1,0 +1,34 @@
+<div class="jumbotron text-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1>Discover Linux Software</h1>
+				<p>Easily search for software and discover which distros have it in their repositories.</p>
+				<br />
+				<%= form_tag software_search_form_path, method: :get, enforce_utf8: false, class: "form-inline" do %>
+					<div class="form-group has-feedback">
+						<%= text_field_tag "query", "", size: "30", class: "form-control" %>
+						<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Recently Updated</h2>
+			<% @recent_softwares.each do |software| %>
+				<h3><%= link_to software.name, software %> <small><%= software.short_description %></small></h3>
+			<% end %>
+		</div>
+		<div class="col-md-6">
+			<h2>Stats</h2>
+			<h3><b><%= @num_softwares %></b> <%= "software title".pluralize(@num_softwares) %></h3>
+			<h3><b><%= @num_packages %></b> <%= "package".pluralize(@num_packages) %></h3>
+			<h3><b><%= @num_distros %></b> <%= "Linux distro".pluralize(@num_distros) %></h3>
+			<h3><b><%= @num_repos %></b> <%= "repository".pluralize(@num_repos) %></h3>
+		</div>
+	</div>
+</div>
